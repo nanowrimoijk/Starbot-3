@@ -1,9 +1,5 @@
 let prefix = process.env.PREFIX;
 
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('econ_db.json');
-const db = low(adapter);
 
 const moment = require('moment');
 
@@ -19,9 +15,9 @@ module.exports = {
 
 	execute(client, message, args, Discord) {
 		try{
-			let user = db.get(`users.${message.author.id}`).value();
+			//let user = db.get(`users.${message.author.id}`).value();
 			console.log(user);
-			let thing = db.get('users').value();
+			//let thing = db.get('users').value();
 			console.log(thing)
 
 			if(user == undefined){
@@ -121,7 +117,7 @@ function give_daily(message, temp_user, Discord){
 		temp_user.money += streak_bonus * temp_user.daily_streak;
 		temp_user.last_daily = new Date().getTime();
 
-		db.set(`users.${message.author.id}`, temp_user).write();
+		//db.set(`users.${message.author.id}`, temp_user).write();
 
 		let exampleEmbed = new Discord.MessageEmbed()
 						.setColor('#8ce7ff')
@@ -129,8 +125,8 @@ function give_daily(message, temp_user, Discord){
 		You claimed $${daily_value + (streak_bonus * temp_user.daily_streak)}! Come back tomorrow to keep your streak!`)
 						.setTimestamp()
 
-					//message.channel.send(exampleEmbed);
-					message.channel.send({embeds: [exampleEmbed]}).catch(console.error);
+		//message.channel.send(exampleEmbed);
+		message.channel.send({embeds: [exampleEmbed]}).catch(console.error);
 
 		/*
 		DB.set(`${message.author.id}`, temp_user).then(() => {

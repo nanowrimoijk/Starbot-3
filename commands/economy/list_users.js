@@ -1,9 +1,5 @@
 let prefix = process.env.PREFIX;
 
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('econ_db.json');
-const db = low(adapter);
 
 module.exports = {
 	name: "list_users",

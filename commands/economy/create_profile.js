@@ -1,12 +1,5 @@
 let prefix = process.env.PREFIX;
 
-const low = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('econ_db.json');
-const db = low(adapter);
-
-db.defaults({ users: {} }).write();
-
 
 const moment = require('moment');
 

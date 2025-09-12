@@ -1,5 +1,3 @@
-const Database = require("@replit/database");
-const DB = new Database();
 
 module.exports = (Discord, client, guild) => {
 
