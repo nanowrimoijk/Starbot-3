@@ -31,6 +31,6 @@ module.exports = {
 		});
 		*/
 
-		await db.set(`users.${message.author.id}`, base_user).write();
+		//await db.set(`users.${message.author.id}`, base_user).write();
 	}
 }
