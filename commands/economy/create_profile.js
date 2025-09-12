@@ -6,7 +6,7 @@ let con = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD, 
-  database: 'economy'
+  //database: 'economy'
 });
 
 
@@ -16,7 +16,7 @@ module.exports = {
 	name: "create_profile",
 	description: "creates an economy profile for those who dont have one",
 	usage: `${prefix}create_profile`,
-	developer: true, 
+	developer: false, 
 	category: 'developer/debug', 
 
 	async execute(client, message, args, Discord) {
