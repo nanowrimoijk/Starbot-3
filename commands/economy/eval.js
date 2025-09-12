@@ -1,6 +1,6 @@
 let prefix = process.env.PREFIX;
 
-let mysql = require('mysql2');
+let mysql = require('mysql');
 
 let con = mysql.createConnection({
   host: process.env.DB_HOST,
