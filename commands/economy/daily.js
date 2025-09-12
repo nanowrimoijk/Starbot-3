@@ -1,5 +1,14 @@
 let prefix = process.env.PREFIX;
 
+let mysql = require('mysql2');
+
+let con = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD, 
+  database: 'economy'
+});
+
 
 const moment = require('moment');
 
@@ -15,82 +24,63 @@ module.exports = {
 
 	execute(client, message, args, Discord) {
 		try{
-			//let user = db.get(`users.${message.author.id}`).value();
-			console.log(user);
-			//let thing = db.get('users').value();
-			console.log(thing)
 
-			if(user == undefined){
-				client.commands.get('create_profile').execute(client, message, args, Discord);
-			}
-			else{
-				let diffTime = Math.abs(moment() - user.last_daily);
-				let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-				let diffHours = Math.round(diffTime / (1000 * 60 * 60));
-				let diffMinutes = Math.round(diffTime / (1000 * 60));
-				let diffSeconds = Math.round(diffTime / (1000));
+			con.connect(function(err){
+				if(err) throw err;
+				let sql;
 
-				if(diffDays >= 1){
-					let temp_user = user;
+				let user = {
+					money: 0, 
+					last_daily: Math.round(new Date / (1000 * 60 * 60 * 24)), 
+					daily_streak: 0, 
+					last_work: Math.round(new Date / (1000 * 60 * 60 * 24))
+				}
 
-					if(diffDays > 1){
-						temp_user.daily_streak = 0;
-					}else{
-						temp_user.daily_streak += 1;
+				sql = `SELECT * FROM users WHERE id = ${message.author.id}`
+				con.query(sql, function(err, result){
+
+					if(result == undefined || result[0] == undefined){
+						client.commands.get('create_profile').execute(client, message, args, Discord);
 					}
-					give_daily(message, temp_user, Discord);
-				}else{
-					//console.log(moment(user.last_daily).calendar());
-					//console.log(moment().calendar());
-					//console.log(moment().hours());
-					let exampleEmbed = new Discord.MessageEmbed()
-						.setColor('#8ce7ff')
-						.setDescription(`${message.author}, you have already claimed your daily reward!
-			Come back in ${24 - diffHours} hours to claim it again!`)
-						.setTimestamp()
+					else{
+						let user = result[0];
 
-						message.reply({embeds: [exampleEmbed]}).catch(console.error);
-				}
-			}
-			
-			/*
-			DB.get(`${message.author.id}`).then(user => {
+						let diffTime = Math.abs(moment() - user.last_daily);
+						let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+						let diffHours = Math.round(diffTime / (1000 * 60 * 60));
+						let diffMinutes = Math.round(diffTime / (1000 * 60));
+						let diffSeconds = Math.round(diffTime / (1000));
 
-				if(user == null){
-					let command = client.commands.get('create_profile').execute(client, message, args, Discord);
-				}
-				else{
-					let diffTime = Math.abs(moment() - user.last_daily);
-					let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-					let diffHours = Math.round(diffTime / (1000 * 60 * 60));
-					let diffMinutes = Math.round(diffTime / (1000 * 60));
-					let diffSeconds = Math.round(diffTime / (1000));
+						console.log(user)
 
-					if(diffDays >= 1){
-						let temp_user = user;
+						if(diffDays >= 1){
+							let temp_user = user;
 
-						if(diffDays > 1){
-							temp_user.daily_streak = 0;
+							if(diffDays > 1){
+								temp_user.daily_streak = 0;
+							}else{
+								temp_user.daily_streak += 1;
+							}
+							give_daily(message, temp_user, Discord);
 						}else{
-							temp_user.daily_streak += 1;
-						}
-						give_daily(message, temp_user, Discord);
-					}else{
-						//console.log(moment(user.last_daily).calendar());
-						//console.log(moment().calendar());
-						//console.log(moment().hours());
-						let exampleEmbed = new Discord.MessageEmbed()
-							.setColor('#8ce7ff')
-							.setDescription(`${message.author}, you have already claimed your daily reward!
-Come back in ${24 - diffHours} hours to claim it again!`)
-							.setTimestamp()
+							//console.log(moment(user.last_daily).calendar());
+							//console.log(moment().calendar());
+							//console.log(moment().hours());
+							let exampleEmbed = new Discord.MessageEmbed()
+								.setColor('#8ce7ff')
+								.setDescription(`${message.author}, you have already claimed your daily reward!
+					Come back in ${24 - diffHours} hours to claim it again!`)
+								.setTimestamp()
 
-							message.reply({embeds: [exampleEmbed]}).catch(console.error);
+								message.reply({embeds: [exampleEmbed]}).catch(console.error);
+						}
 					}
-				}
+				});
 			});
-			*/
-		}catch{}
+
+		}catch(err){
+			console.log(err);
+		}
 	}
 }
 
@@ -117,16 +107,22 @@ function give_daily(message, temp_user, Discord){
 		temp_user.money += streak_bonus * temp_user.daily_streak;
 		temp_user.last_daily = new Date().getTime();
 
-		//db.set(`users.${message.author.id}`, temp_user).write();
+		con.connect(function(err){
 
-		let exampleEmbed = new Discord.MessageEmbed()
+			let sql = `UPDATE users SET money = ${temp_user.money}, last_daily = ${temp_user.last_daily}, daily_streak = ${temp_user.daily_streak}, last_work = ${temp_user.last_work} WHERE id = ${message.author.id}`;
+			con.query(sql, function(err, result){
+				if(err) throw err;
+
+				let exampleEmbed = new Discord.MessageEmbed()
 						.setColor('#8ce7ff')
 						.setDescription(`${message.author}, you have claimed ${temp_user.daily_streak} days in a row!
 		You claimed $${daily_value + (streak_bonus * temp_user.daily_streak)}! Come back tomorrow to keep your streak!`)
 						.setTimestamp()
 
-		//message.channel.send(exampleEmbed);
-		message.channel.send({embeds: [exampleEmbed]}).catch(console.error);
+				//message.channel.send(exampleEmbed);
+				message.channel.send({embeds: [exampleEmbed]}).catch(console.error);
+			});
+		});
 
 		/*
 		DB.set(`${message.author.id}`, temp_user).then(() => {
