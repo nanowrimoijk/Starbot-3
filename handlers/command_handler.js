@@ -19,7 +19,7 @@ module.exports = (client, Discord) => {
 		}
 	}
 
-	['debug', 'general', 'mod', 'developer'].forEach(e => load_dir(e));
+	['debug', 'general', 'mod', 'economy', 'developer'].forEach(e => load_dir(e));
 	console.log("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 	// to load more command directories, please add more to this array: 
 	// Ex) if you want to put commands in a folder called "fun", you would add 'fun' to the array making it ['debug', 'fun'].....
