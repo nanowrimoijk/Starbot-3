@@ -1,5 +1,13 @@
 let prefix = process.env.PREFIX;
 
+let mysql = require('mysql2');
+
+let con = mysql.createConnection({
+ 	host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD, 
+  database: process.env.DB_DATABASE
+});
 
 
 const moment = require('moment');
@@ -12,6 +20,28 @@ module.exports = {
 	category: 'economy', 
 
 	execute(client, message, args, Discord) {
+
+		con.connect(function(err){
+			let sql = `SELECT * FROM users WHERE id = ${message.author.id}`;
+			con.query(sql, function(err, result){
+
+				if(result == undefined || result[0] == undefined){
+				let command = client.commands.get('create_profile').execute(client, message, args, Discord);
+			}else{
+				let user = result[0];
+				
+				let profile_embed = new Discord.MessageEmbed()
+					.setColor('#8ce7ff')
+					.setTitle(`${message.author.username}'s profile`)
+					.setDescription(`${message.author} you have $${user.money}`)
+					.addField(`login streak: ${user.daily_streak}`, `last daily taken ${moment(user.last_daily).fromNow()}`)
+					.setTimestamp()
+
+
+				message.channel.send({embeds: [profile_embed]}).catch(console.error);
+			}
+			});
+		});
 		/*
 		DB.get(`${message.author.id}`).then(user => {
 

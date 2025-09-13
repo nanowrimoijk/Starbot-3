@@ -6,7 +6,7 @@ let con = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD, 
-  database: 'customer_1121843_economy'
+  database: process.env.DB_DATABASE
 });
 
 
@@ -26,9 +26,9 @@ module.exports = {
 
 		let base_user = {
 			money: 0, 
-			last_daily: Math.round(moment() / (1000 * 60 * 60 * 24)), 
+			last_daily: moment(Math.round(moment().valueOf() / (1000 * 60 * 60 * 24))), 
 			daily_streak: 0, 
-			last_work: Math.round(moment() / (1000 * 60 * 60 * 24))
+			last_work: moment(Math.round(moment().valueOf() / (1000 * 60 * 60 * 24)))
 		}
 
 		console.log(`user ${message.author.id} not found, creating profile`);
@@ -61,7 +61,7 @@ module.exports = {
 		  //   console.log("Table created");
 		  // });
 
-		   sql = `INSERT INTO users (id, money, last_daily, daily_streak, last_work) VALUES (${message.author.id}, ${base_user.money}, ${base_user.last_daily}, ${base_user.daily_streak}, ${base_user.last_work})`;
+		   sql = `INSERT INTO users (id, money, last_daily, daily_streak, last_work) VALUES (${message.author.id}, ${base_user.money}, '${base_user.last_daily}', ${base_user.daily_streak}, '${base_user.last_work}')`;
 		   con.query(sql, function (err, result) {
 		     if (err) throw err;
 		     console.log("1 record inserted");

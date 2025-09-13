@@ -6,7 +6,7 @@ let con = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD, 
-  database: 'customer_1121843_economy'
+  database: process.env.DB_DATABASE
 });
 
 
@@ -31,9 +31,9 @@ module.exports = {
 
 				let user = {
 					money: 0, 
-					last_daily: Math.round(new Date / (1000 * 60 * 60 * 24)), 
+					last_daily: Math.round(moment().valueOf() / (1000 * 60 * 60 * 24)), 
 					daily_streak: 0, 
-					last_work: Math.round(new Date / (1000 * 60 * 60 * 24))
+					last_work: Math.round(moment().valueOf() / (1000 * 60 * 60 * 24))
 				}
 
 				sql = `SELECT * FROM users WHERE id = ${message.author.id}`
@@ -45,7 +45,8 @@ module.exports = {
 					else{
 						let user = result[0];
 
-						let diffTime = Math.abs(moment() - user.last_daily);
+						let diffTime = Math.abs(moment().valueOf() - moment(user.last_daily).valueOf());//THIS RIGHT HEEREREERRER
+						console.log(diffTime)
 						let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 						let diffHours = Math.round(diffTime / (1000 * 60 * 60));
 						let diffMinutes = Math.round(diffTime / (1000 * 60));
@@ -55,6 +56,7 @@ module.exports = {
 
 						if(diffDays >= 1){
 							let temp_user = user;
+							temp_user.daily_streak = parseInt(temp_user.daily_streak);
 
 							if(diffDays > 1){
 								temp_user.daily_streak = 0;
@@ -91,7 +93,7 @@ function give_daily(message, temp_user, Discord){
 		//console.log(user)
 		//console.log()
 
-		let diffTime = Math.abs(moment() - temp_user.last_daily);
+		let diffTime = Math.abs(moment().valueOf() - moment(temp_user.last_daily).valueOf());
 		let diffDays = Math.round(diffTime / (1000 * 60 * 24));
 		let diffHours = Math.round(diffTime / (1000 * 60));
 		let diffMinutes = Math.round(diffTime / (1000));
@@ -103,13 +105,14 @@ function give_daily(message, temp_user, Discord){
 		//console.log(nextDaily.fromNow());
 		//console.log(diffMinutes);
 
+		temp_user.money = parseInt(temp_user.money);
 		temp_user.money += daily_value;
 		temp_user.money += streak_bonus * temp_user.daily_streak;
-		temp_user.last_daily = new Date().getTime();
+		temp_user.last_daily = moment();
 
 		con.connect(function(err){
 
-			let sql = `UPDATE users SET money = ${temp_user.money}, last_daily = ${temp_user.last_daily}, daily_streak = ${temp_user.daily_streak}, last_work = ${temp_user.last_work} WHERE id = ${message.author.id}`;
+			let sql = `UPDATE users SET money = ${temp_user.money}, last_daily = '${temp_user.last_daily}', daily_streak = ${temp_user.daily_streak}, last_work = '${temp_user.last_work}' WHERE id = ${message.author.id}`;
 			con.query(sql, function(err, result){
 				if(err) throw err;
 
