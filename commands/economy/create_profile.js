@@ -16,7 +16,7 @@ module.exports = {
 	name: "create_profile",
 	description: "creates an economy profile for those who dont have one",
 	usage: `${prefix}create_profile`,
-	developer: false, 
+	developer: true, 
 	category: 'developer/debug', 
 
 	async execute(client, message, args, Discord) {
