@@ -10,7 +10,7 @@ module.exports = {
 	execute(client, message, args, Discord) {
 		const exampleEmbed = new Discord.MessageEmbed()
 			.setColor('#00')
-			.setTitle('Commands')
+			.setTitle('To Do')
 			.setAuthor('Help')//image is next argument
 			.addField('update', '~slots will work in tandem with economy')
 			.setTimestamp()
