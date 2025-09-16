@@ -110,23 +110,19 @@ module.exports = {
 
 
 function give_daily(message, temp_user, Discord){
-		//console.log()
-		//console.log(user)
-		//console.log()
-
-		let diffTime = Math.abs(moment().valueOf() - moment(temp_user.last_daily).valueOf());
-		let diffDays = Math.round(diffTime / (1000 * 60 * 24));
-		let diffHours = Math.round(diffTime / (1000 * 60));
-		let diffMinutes = Math.round(diffTime / (1000));
-		let lastDaily = moment(temp_user.last_daily);
-		let nextDaily = moment(temp_user.last_daily).add(24, 'hour');
-
-
 
 		temp_user.money = parseInt(temp_user.money);
 		temp_user.money += daily_value;
 		temp_user.money += streak_bonus * temp_user.daily_streak;
 		temp_user.last_daily = moment(temp_user.last_daily).add(1, 'd');
+
+
+		let diffTime = Math.abs(moment().valueOf() - moment(temp_user.last_daily).valueOf());//THIS RIGHT HEEREREERRER
+		let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+		let diffHours = Math.round(diffTime / (1000 * 60 * 60));
+		let diffMinutes = Math.round(diffTime / (1000 * 60));
+		let diffSeconds = Math.round(diffTime / (1000));
+
 
 		con.connect(function(err){
 
@@ -136,7 +132,7 @@ function give_daily(message, temp_user, Discord){
 
 				let exampleEmbed = new Discord.MessageEmbed()
 						.setColor('#8ce7ff')
-						.setDescription(`${message.author}, you have claimed ${temp_user.daily_streak} days in a row!\nYou claimed $${daily_value + (streak_bonus * temp_user.daily_streak)}! Come back tomorrow to keep your streak!`)
+						.setDescription(`${message.author}, you have claimed ${temp_user.daily_streak} days in a row!\nYou claimed $${daily_value + (streak_bonus * temp_user.daily_streak)}! Come back in ${24 - diffHours} hours to keep your streak!`)
 						.setTimestamp()
 
 				//message.channel.send(exampleEmbed);

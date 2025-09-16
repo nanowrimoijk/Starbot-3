@@ -29,13 +29,19 @@ module.exports = {
 					client.commands.get('create_profile').execute(client, message, args, Discord, 'profile');
 				}else{
 					let user = result[0];
+					let daily_text = moment(user.last_daily).fromNow();
+
+					if(moment().valueOf() >= moment(user.last_daily)){
+						daily_text = 'right now!'
+					}
+
 					
 					let profile_embed = new Discord.MessageEmbed()
 						.setColor('#8ce7ff')
 						.setTitle(`${message.author.username}'s profile`)
 						.setDescription(`${message.author} you have $${user.money}`)
 						.addFields(
-							{ name: `login streak: ${user.daily_streak}`, value: `Next daily ${moment(user.last_daily).fromNow()}` }
+							{ name: `login streak: ${user.daily_streak}`, value: `Next daily ${daily_text}` }//need to fix thissssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 							)
 						.setTimestamp()
 
