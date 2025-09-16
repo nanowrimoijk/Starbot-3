@@ -21,15 +21,15 @@ module.exports = {
 	
 	execute(client, message, args, Discord) {
 
-		con.connect(function(err){
-			if (err) throw err;
+		// con.connect(function(err){
+		// 	if (err) throw err;
 
-			let sql = `UPDATE users SET last_daily = '${moment().hours(0).minutes(0).seconds(0).milliseconds(0)}'`;
-		  con.query(sql, function (err, result) {
-		    if (err) throw err;
-		    console.log(result.affectedRows + " record(s) updated");
-		  });
-		});
+		// 	let sql = `UPDATE users SET last_daily = '${moment().hours(0).minutes(0).seconds(0).milliseconds(0)}'`;
+		//   con.query(sql, function (err, result) {
+		//     if (err) throw err;
+		//     console.log(result.affectedRows + " record(s) updated");
+		//   });
+		// });
 
 
 		message.channel.send('Finding ping...').then(resultMessage => {
