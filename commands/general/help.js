@@ -7,6 +7,7 @@ module.exports = {
 	category: 'general/general', 
 
 	execute(client, message, args, Discord) {
+
 		let embed = new Discord.MessageEmbed()
 			.setColor('#00')
 			.setTitle("Help")
@@ -14,7 +15,9 @@ module.exports = {
 
 		client.commands.forEach(function(command) {
 			if(!command.admin && !command.mod && !command.developer){
-				embed.addField(`${command.name}`, `${command.usage} => ${command.description}`);
+				embed.addFields(
+				{ name: `${command.name}`, value: `${command.usage} => ${command.description}` }
+					);
 			}
 		});
 

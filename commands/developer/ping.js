@@ -1,4 +1,16 @@
 let prefix = process.env.PREFIX;
+let moment = require('moment');
+
+let mysql = require('mysql2');
+
+let con = mysql.createConnection({
+ 	host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD, 
+  database: process.env.DB_DATABASE
+});
+
+
 
 module.exports = {
 	name: 'ping',
@@ -8,6 +20,18 @@ module.exports = {
 	developer: true, 
 	
 	execute(client, message, args, Discord) {
+
+		con.connect(function(err){
+			if (err) throw err;
+
+			let sql = `UPDATE users SET last_daily = '${moment().hours(0).minutes(0).seconds(0).milliseconds(0)}'`;
+		  con.query(sql, function (err, result) {
+		    if (err) throw err;
+		    console.log(result.affectedRows + " record(s) updated");
+		  });
+		});
+
+
 		message.channel.send('Finding ping...').then(resultMessage => {
 			const ping = resultMessage.createdTimestamp - message.createdTimestamp;
 

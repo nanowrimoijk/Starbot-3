@@ -26,20 +26,24 @@ module.exports = {
 			con.query(sql, function(err, result){
 
 				if(result == undefined || result[0] == undefined){
-				let command = client.commands.get('create_profile').execute(client, message, args, Discord);
-			}else{
-				let user = result[0];
-				
-				let profile_embed = new Discord.MessageEmbed()
-					.setColor('#8ce7ff')
-					.setTitle(`${message.author.username}'s profile`)
-					.setDescription(`${message.author} you have $${user.money}`)
-					.addField(`login streak: ${user.daily_streak}`, `last daily taken ${moment(user.last_daily).fromNow()}`)
-					.setTimestamp()
+					client.commands.get('create_profile').execute(client, message, args, Discord, 'profile');
+				}else{
+					let user = result[0];
+					
+					let profile_embed = new Discord.MessageEmbed()
+						.setColor('#8ce7ff')
+						.setTitle(`${message.author.username}'s profile`)
+						.setDescription(`${message.author} you have $${user.money}`)
+						.addFields(
+							{ name: `login streak: ${user.daily_streak}`, value: `Next daily ${moment(user.last_daily).fromNow()}` }
+							)
+						.setTimestamp()
 
 
-				message.channel.send({embeds: [profile_embed]}).catch(console.error);
-			}
+					message.channel.send({embeds: [profile_embed]}).catch(console.error);
+
+					console.log()
+				}
 			});
 		});
 		/*

@@ -19,16 +19,16 @@ module.exports = {
 	developer: true, 
 	category: 'developer/debug', 
 
-	async execute(client, message, args, Discord) {
+	async execute(client, message, args, Discord, callback) {
 
 		let args1 = message.content.slice(prefix.length).split(/ +/g);
 		let cmd = args1.shift().toLowerCase();
 
 		let base_user = {
 			money: 0, 
-			last_daily: moment(Math.round(moment().valueOf() / (1000 * 60 * 60 * 24))), 
+			last_daily: moment().hours(0).minutes(0).seconds(0).milliseconds(0), 
 			daily_streak: 0, 
-			last_work: moment(Math.round(moment().valueOf() / (1000 * 60 * 60 * 24)))
+			last_work: moment().hours(0).minutes(0).seconds(0).milliseconds(0)
 		}
 
 		console.log(`user ${message.author.id} not found, creating profile`);
@@ -65,12 +65,16 @@ module.exports = {
 		   con.query(sql, function (err, result) {
 		     if (err) throw err;
 		     console.log("1 record inserted");
+
+		    if(callback != undefined){
+					client.commands.get(callback).execute(client, message, args, Discord);
+				}
 		   });
 
 
 
 		});
 
-		message.reply('initalized your economy profile, please run that command again!');
+		//message.reply('initalized your economy profile, please run that command again!');
 	}
 }

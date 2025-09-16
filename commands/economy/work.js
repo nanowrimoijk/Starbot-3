@@ -30,7 +30,7 @@ module.exports = {
 				if(err) throw err;
 
 				if(result == undefined || result[0] == undefined){
-					let command = client.commands.get('create_profile').execute(client, message, args, Discord);
+					client.commands.get('create_profile').execute(client, message, args, Discord, 'work');
 				}else{
 					let user = result[0];
 

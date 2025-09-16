@@ -29,30 +29,50 @@ module.exports = {
 				if(err) throw err;
 				let sql;
 
-				let user = {
-					money: 0, 
-					last_daily: Math.round(moment().valueOf() / (1000 * 60 * 60 * 24)), 
-					daily_streak: 0, 
-					last_work: Math.round(moment().valueOf() / (1000 * 60 * 60 * 24))
-				}
-
 				sql = `SELECT * FROM users WHERE id = ${message.author.id}`
 				con.query(sql, function(err, result){
 
 					if(result == undefined || result[0] == undefined){
-						client.commands.get('create_profile').execute(client, message, args, Discord);
+						client.commands.get('create_profile').execute(client, message, args, Discord, 'daily');
 					}
 					else{
 						let user = result[0];
 
 						let diffTime = Math.abs(moment().valueOf() - moment(user.last_daily).valueOf());//THIS RIGHT HEEREREERRER
-						console.log(diffTime)
 						let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 						let diffHours = Math.round(diffTime / (1000 * 60 * 60));
 						let diffMinutes = Math.round(diffTime / (1000 * 60));
 						let diffSeconds = Math.round(diffTime / (1000));
 
-						console.log(user)
+
+						console.log(moment().valueOf() >= moment(user.last_daily).valueOf())
+
+						if(moment().valueOf() >= moment(user.last_daily).valueOf()){
+							let temp_user = user;
+							temp_user.daily_streak = parseInt(temp_user.daily_streak);
+
+							if(diffDays > 1){
+								temp_user.daily_streak = 0;
+							}else{
+								temp_user.daily_streak += 1;
+							}
+							
+							give_daily(message, temp_user, Discord);
+						}else{
+							let exampleEmbed = new Discord.MessageEmbed()
+								.setColor('#8ce7ff')
+								.setDescription(`${message.author}, you have already claimed your daily reward!\nCome back in ${24 - diffHours} hours to claim it again!`)
+								.setTimestamp()
+
+								message.reply({embeds: [exampleEmbed]}).catch(console.error);
+						}
+
+
+
+						/*
+
+						console.log(moment(user.last_daily).fromNow());
+						console.log(moment(user.last_daily).add(1, 'd').fromNow());
 
 						if(diffDays >= 1){
 							let temp_user = user;
@@ -76,6 +96,7 @@ module.exports = {
 
 								message.reply({embeds: [exampleEmbed]}).catch(console.error);
 						}
+						*/
 					}
 				});
 			});
@@ -100,15 +121,12 @@ function give_daily(message, temp_user, Discord){
 		let lastDaily = moment(temp_user.last_daily);
 		let nextDaily = moment(temp_user.last_daily).add(24, 'hour');
 
-		//console.log(lastDaily.calendar());
-		//console.log(nextDaily.calendar());
-		//console.log(nextDaily.fromNow());
-		//console.log(diffMinutes);
+
 
 		temp_user.money = parseInt(temp_user.money);
 		temp_user.money += daily_value;
 		temp_user.money += streak_bonus * temp_user.daily_streak;
-		temp_user.last_daily = moment();
+		temp_user.last_daily = moment(temp_user.last_daily).add(1, 'd');
 
 		con.connect(function(err){
 
@@ -118,25 +136,11 @@ function give_daily(message, temp_user, Discord){
 
 				let exampleEmbed = new Discord.MessageEmbed()
 						.setColor('#8ce7ff')
-						.setDescription(`${message.author}, you have claimed ${temp_user.daily_streak} days in a row!
-		You claimed $${daily_value + (streak_bonus * temp_user.daily_streak)}! Come back tomorrow to keep your streak!`)
+						.setDescription(`${message.author}, you have claimed ${temp_user.daily_streak} days in a row!\nYou claimed $${daily_value + (streak_bonus * temp_user.daily_streak)}! Come back tomorrow to keep your streak!`)
 						.setTimestamp()
 
 				//message.channel.send(exampleEmbed);
 				message.channel.send({embeds: [exampleEmbed]}).catch(console.error);
 			});
 		});
-
-		/*
-		DB.set(`${message.author.id}`, temp_user).then(() => {
-			let exampleEmbed = new Discord.MessageEmbed()
-				.setColor('#8ce7ff')
-				.setDescription(`${message.author}, you have claimed ${temp_user.daily_streak} days in a row!
-You claimed $${daily_value + (streak_bonus * temp_user.daily_streak)}! Come back tomorrow to keep your streak!`)
-				.setTimestamp()
-
-			//message.channel.send(exampleEmbed);
-			message.channel.send({embeds: [exampleEmbed]}).catch(console.error);
-		});
-	*/
 }
