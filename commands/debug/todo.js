@@ -13,6 +13,8 @@ module.exports = {
 			.setTitle('To Do')
 			.setAuthor('Help')//image is next argument
 			.addField('update', '~slots will work in tandem with economy')
+			.addField('command', '~leaderboard for economy')
+			.addField('bug fix', '~work and ~daily timers are not properly set')
 			.setTimestamp()
 
 		//message.channel.send(exampleEmbed);
