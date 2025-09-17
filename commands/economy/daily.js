@@ -38,17 +38,26 @@ module.exports = {
 					else{
 						let user = result[0];
 
-						let diffTime = Math.abs(moment().valueOf() - moment(user.last_daily).valueOf());//THIS RIGHT HEEREREERRER
+						let diffTime = Math.abs(moment().valueOf() - moment(user.last_daily).valueOf());//math.abs makes this not a negative
 						let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 						let diffHours = Math.round(diffTime / (1000 * 60 * 60));
 						let diffMinutes = Math.round(diffTime / (1000 * 60));
 						let diffSeconds = Math.round(diffTime / (1000));
 
+						console.log('')
+						console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
+						console.log(moment(user.last_daily).format("dddd, MMMM Do YYYY, h:mm:ss a"));
+						console.log('')
+
 
 						console.log(moment().valueOf())
 						console.log(moment(user.last_daily).valueOf())
 						console.log(moment().valueOf() >= moment(user.last_daily).valueOf())
+
 						console.log('')
+						console.log( (Math.abs(moment().valueOf() - moment(user.last_daily).valueOf())) / (1000 * 60 * 60) )
+						console.log( (moment().valueOf() - moment(user.last_daily).valueOf()) / (1000 * 60 * 60) )
+
 
 						if(moment().valueOf() >= moment(user.last_daily).valueOf()){
 							let temp_user = user;
@@ -64,7 +73,7 @@ module.exports = {
 						}else{
 							let exampleEmbed = new Discord.MessageEmbed()
 								.setColor('#8ce7ff')
-								.setDescription(`${message.author}, you have already claimed your daily reward!\nCome back in ${24 - diffHours} hours to claim it again!`)
+								.setDescription(`${message.author}, you have already claimed your daily reward!\nCome back in ${diffHours} hours to claim it again!`)
 								.setTimestamp()
 
 								message.reply({embeds: [exampleEmbed]}).catch(console.error);
@@ -135,7 +144,7 @@ function give_daily(message, temp_user, Discord){
 
 				let exampleEmbed = new Discord.MessageEmbed()
 						.setColor('#8ce7ff')
-						.setDescription(`${message.author}, you have claimed ${temp_user.daily_streak} days in a row!\nYou claimed $${daily_value + (streak_bonus * temp_user.daily_streak)}! Come back in ${24 - diffHours} hours to keep your streak!`)
+						.setDescription(`${message.author}, you have claimed ${temp_user.daily_streak} days in a row!\nYou claimed $${daily_value + (streak_bonus * temp_user.daily_streak)}! Come back in ${diffHours} hours to keep your streak!`)
 						.setTimestamp()
 
 				//message.channel.send(exampleEmbed);
