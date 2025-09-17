@@ -13,8 +13,7 @@ module.exports = {
 			.setTitle('To Do')
 			.addFields(
 				{ name: 'update', value: '~slots will work in tandem with economy' }, 
-				{ name: 'command', value: '~leaderboard for economy' }, 
-				{ name: 'bug fix', value: '~work and ~daily timers are not properly set' }
+				{ name: 'command', value: '~leaderboard for economy' }
 				)
 			.setTimestamp()
 

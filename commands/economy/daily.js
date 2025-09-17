@@ -45,7 +45,10 @@ module.exports = {
 						let diffSeconds = Math.round(diffTime / (1000));
 
 
+						console.log(moment().valueOf())
+						console.log(moment(user.last_daily).valueOf())
 						console.log(moment().valueOf() >= moment(user.last_daily).valueOf())
+						console.log('')
 
 						if(moment().valueOf() >= moment(user.last_daily).valueOf()){
 							let temp_user = user;
