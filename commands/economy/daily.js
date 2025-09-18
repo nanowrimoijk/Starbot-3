@@ -55,8 +55,8 @@ module.exports = {
 						console.log(moment().valueOf() >= moment(user.last_daily).valueOf())
 
 						console.log('')
-						console.log( (Math.abs(moment().valueOf() - moment(user.last_daily).valueOf())) / (1000 * 60 * 60) )
-						console.log( (moment().valueOf() - moment(user.last_daily).valueOf()) / (1000 * 60 * 60) )
+						console.log(Math.round(diffTime / (1000 * 60 * 60)))
+						console.log(diffTime / (1000 * 60 * 60))
 
 
 						if(moment().valueOf() >= moment(user.last_daily).valueOf()){
@@ -126,7 +126,8 @@ function give_daily(message, temp_user, Discord){
 		temp_user.money = parseInt(temp_user.money);
 		temp_user.money += daily_value;
 		temp_user.money += streak_bonus * temp_user.daily_streak;
-		temp_user.last_daily = moment(temp_user.last_daily).add(1, 'd');
+		//temp_user.last_daily = moment(temp_user.last_daily).add(1, 'd');//THIS NEEDS TO ADD THE DAY OFF OF THE CURRENT MOMENT NOT LAST_DAILY
+		temp_user.last_daily = moment().hours(0).minutes(0).seconds(0).milliseconds(0).add(1, 'd');
 
 
 		let diffTime = Math.abs(moment().valueOf() - moment(temp_user.last_daily).valueOf());//THIS RIGHT HEEREREERRER
