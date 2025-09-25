@@ -2,7 +2,7 @@ let prefix = process.env.PREFIX;
 
 let mysql = require('mysql2');
 
-let con = mysql.createConnection({
+let con = mysql.createPool({
  	host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD, 
@@ -23,7 +23,8 @@ module.exports = {
 
 	execute(client, message, args, Discord) {
 
-		con.connect(function(err){
+		con.getConnection(function(err, connection){
+			if(err) throw err;
 
 			let sql = `SELECT * FROM users WHERE id = ${message.author.id}`;
 			con.query(sql, function(err, result){
@@ -56,6 +57,8 @@ Come back in ${60 - diffMinutes} minutes!`)
 					}
 				}
 			});
+
+			connection.release();
 		});
 
 
@@ -91,37 +94,43 @@ Come back in ${60 - diffMinutes} minutes!`)
 
 function give_work(message, Discord){
 
-	let sql = `SELECT * FROM users WHERE id = ${message.author.id}`;
-	con.query(sql, function(err, result){
+	con.getConnection(function(err, connection){
 		if(err) throw err;
-
-		let user = result[0];
-
-		let diffTime = Math.abs(moment().valueOf() - moment(user.last_work).valueOf());
-		let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-		let diffHours = Math.round(diffTime / (1000 * 60 * 60));
-		let diffMinutes = Math.round(diffTime / (1000 * 60));
-		let diffSeconds = Math.round(diffTime / (1000));
-
-		let temp_user = user;
-		temp_user.money = parseInt(temp_user.money);
-		temp_user.money += work_value;
-		temp_user.last_work = moment();
-
-		sql = `UPDATE users SET money = ${temp_user.money}, last_daily = '${temp_user.last_daily}', daily_streak = ${temp_user.daily_streak}, last_work = '${temp_user.last_work}' WHERE id = ${message.author.id}`;
-		con.query(sql, function(err, result){
-			if(err) throw err;
-
-			let exampleEmbed = new Discord.MessageEmbed()
-				.setColor('#8ce7ff')
-				.setDescription(`${message.author}, you worked to gain $${work_value}!
-You now have $${temp_user.money}, come back in 1 hour to work again!`)
-				.setTimestamp()
-
-			//message.channel.send(exampleEmbed);
-			message.reply({embeds: [exampleEmbed]}).catch(console.error);
+			
+			let sql = `SELECT * FROM users WHERE id = ${message.author.id}`;
+			con.query(sql, function(err, result){
+				if(err) throw err;
+		
+				let user = result[0];
+		
+				let diffTime = Math.abs(moment().valueOf() - moment(user.last_work).valueOf());
+				let diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+				let diffHours = Math.round(diffTime / (1000 * 60 * 60));
+				let diffMinutes = Math.round(diffTime / (1000 * 60));
+				let diffSeconds = Math.round(diffTime / (1000));
+		
+				let temp_user = user;
+				temp_user.money = parseInt(temp_user.money);
+				temp_user.money += work_value;
+				temp_user.last_work = moment();
+		
+				sql = `UPDATE users SET money = ${temp_user.money}, last_daily = '${temp_user.last_daily}', daily_streak = ${temp_user.daily_streak}, last_work = '${temp_user.last_work}' WHERE id = ${message.author.id}`;
+				con.query(sql, function(err, result){
+					if(err) throw err;
+		
+					let exampleEmbed = new Discord.MessageEmbed()
+						.setColor('#8ce7ff')
+						.setDescription(`${message.author}, you worked to gain $${work_value}!
+		You now have $${temp_user.money}, come back in 1 hour to work again!`)
+						.setTimestamp()
+		
+					//message.channel.send(exampleEmbed);
+					message.reply({embeds: [exampleEmbed]}).catch(console.error);
+				});
+		
+				connection.release();
+			});
 		});
-	});
 	/*
 	DB.get(`${message.author.id}`).then(user => {
 		let diffTime = Math.abs(moment() - user.last_work);

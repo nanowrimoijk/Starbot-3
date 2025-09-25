@@ -2,7 +2,7 @@ let prefix = process.env.PREFIX;
 
 let mysql = require('mysql2');
 
-let con = mysql.createConnection({
+let con = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD, 
@@ -20,7 +20,7 @@ module.exports = {
 	execute(client, message, args, Discord) {
 		let sql = args.join(' ');
 
-		con.connect(function(err){
+		con.getConnection(function(err, connection){
 			if(err) throw err;
 
 			con.query(sql, function(err, result){
@@ -33,6 +33,8 @@ module.exports = {
 					console.log(result)
 				}
 			});
+
+			connection.release();
 		});
 	}
 }

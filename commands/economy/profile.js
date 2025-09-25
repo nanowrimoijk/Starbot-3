@@ -2,7 +2,7 @@ let prefix = process.env.PREFIX;
 
 let mysql = require('mysql2');
 
-let con = mysql.createConnection({
+let con = mysql.createPool({
  	host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD, 
@@ -21,7 +21,7 @@ module.exports = {
 
 	execute(client, message, args, Discord) {
 
-		con.connect(function(err){
+		con.getConnection(function(err, connection){
 			let sql = `SELECT * FROM users WHERE id = ${message.author.id}`;
 			con.query(sql, function(err, result){
 
@@ -51,6 +51,8 @@ module.exports = {
 					console.log()
 				}
 			});
+
+			connection.release();
 		});
 		/*
 		DB.get(`${message.author.id}`).then(user => {
