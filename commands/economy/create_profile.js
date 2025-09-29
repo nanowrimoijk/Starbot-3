@@ -2,7 +2,7 @@ let prefix = process.env.PREFIX;
 
 let mysql = require('mysql2');
 
-let con = mysql.createConnection({
+let con = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD, 
@@ -43,7 +43,7 @@ module.exports = {
 		//db.set(`users.${message.author.id}`, base_user).write();
 
 
-		con.connect(function(err) {
+		con.getConnection(function(err, connection) {
 		  if (err) throw err;
 		  console.log("Connected!");
 
@@ -72,7 +72,7 @@ module.exports = {
 		   });
 
 
-
+		  connection.release();
 		});
 
 		//message.reply('initalized your economy profile, please run that command again!');

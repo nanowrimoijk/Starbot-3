@@ -2,7 +2,7 @@ let prefix = process.env.PREFIX;
 
 let mysql = require('mysql2');
 
-let con = mysql.createConnection({
+let con = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD, 
@@ -25,7 +25,7 @@ module.exports = {
 	execute(client, message, args, Discord) {
 		try{
 
-			con.connect(function(err){
+			con.getConnection(function(err, connection){
 				if(err) throw err;
 				let sql;
 
@@ -111,6 +111,8 @@ module.exports = {
 						*/
 					}
 				});
+
+				connection.release();
 			});
 
 		}catch(err){
@@ -137,7 +139,7 @@ function give_daily(message, temp_user, Discord){
 		let diffSeconds = Math.round(diffTime / (1000));
 
 
-		con.connect(function(err){
+		con.getConnection(function(err, connection){
 
 			let sql = `UPDATE users SET money = ${temp_user.money}, last_daily = '${temp_user.last_daily}', daily_streak = ${temp_user.daily_streak}, last_work = '${temp_user.last_work}' WHERE id = ${message.author.id}`;
 			con.query(sql, function(err, result){
@@ -151,5 +153,7 @@ function give_daily(message, temp_user, Discord){
 				//message.channel.send(exampleEmbed);
 				message.channel.send({embeds: [exampleEmbed]}).catch(console.error);
 			});
+
+			connection.release();
 		});
 }
