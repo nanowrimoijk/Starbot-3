@@ -15,7 +15,6 @@ module.exports = {
 			.setColor('#00')
 			.setTitle('Modmail')
 			.setDescription(`Hello ${message.author.username}!\nUpon you sending another message, a channel will be opened for you to speak privately with the moderators of Stargaze City. If this was a mistake or you have decided otherwise, simply do nothing at all.`)
-			.setAuthor(client.user.username)//image is next argument
 			.setTimestamp()
 
 		message.channel.send({ embeds: [greeting] }).catch(console.error);

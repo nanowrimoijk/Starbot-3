@@ -11,7 +11,6 @@ module.exports = {
 		const exampleEmbed = new Discord.MessageEmbed()
 			.setColor('#00')
 			.setTitle('Commands')
-			.setAuthor('Help')//image is next argument
 			.addField('search <tag>', 'Search the database for items tagged with <tag>')
 			.setTimestamp()
 
