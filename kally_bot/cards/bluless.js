@@ -1,0 +1,9 @@
+
+module.exports = {
+	name: 'Bluless', 
+	faction: 'Echorus', 
+	power: 2, 
+	cost: '', 
+	rarity: 'Common', 
+	text: "Obtain a green crystal. If you lose the combat, heal for 1 life, otherwise take 1 damage.", 
+}
