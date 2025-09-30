@@ -11,7 +11,7 @@ module.exports = (Discord, client) => {
     // client.user.setActivity('Running - D.JS Bot Template V3 by snommi');
 
 		//client.user.setPresence({ activity: { name: 'DM me to talk to a mod! | %help' }, status: 'online' });
-		client.user.setPresence({ activities: [{ name: `to ${process.env.PREFIX}help`, type: `LISTENING` }] });
+		client.user.setPresence({ activities: [{ name: `to ${process.env.K_PREFIX}help`, type: `LISTENING` }] });
 
     //client.user.setStatus('idle');
     // Possible Values: online - idle - dnd - invisible
