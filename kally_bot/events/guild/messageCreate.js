@@ -12,7 +12,7 @@ module.exports = (Discord, client, message) => {
 
 	if (!message.author.bot && message.guild != null) {
 
-		let prefix = process.env.PREFIX;
+		let prefix = process.env.K_PREFIX;
 		//console.log(prefix)
 		if ((!message.content.startsWith(prefix) && message.guild != null) || message.author.bot) return;
 
