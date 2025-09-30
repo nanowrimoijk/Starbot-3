@@ -1,4 +1,4 @@
-let prefix = process.env.PREFIX;
+let prefix = process.env.K_PREFIX;
 
 let fs = require('fs');
 
@@ -30,7 +30,7 @@ module.exports = {
 				current_step = [];
 
 				for(let d = previous_step.length - 1; d >= 0; d--){
-					
+
 					if(previous_step[d].split('')[l] == lettered[l]){
 						current_step.push(previous_step[d]);
 					}

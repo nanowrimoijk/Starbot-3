@@ -1,4 +1,4 @@
-let prefix = process.env.PREFIX;
+let prefix = process.env.K_PREFIX;
 
 let { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 
