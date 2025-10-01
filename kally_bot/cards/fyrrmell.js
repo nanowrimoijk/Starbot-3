@@ -1,6 +1,6 @@
 
 module.exports = {
-	name: "Fyr'Mell", 
+	name: "Fyrr'Mell", 
 	faction: "Vel'dhar", 
 	power: 2, 
 	cost: 'KB', 
