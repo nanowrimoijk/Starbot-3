@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Echorus', 
 	power: 2, 
 	cost: 'GBC', 
-	rarity: 'Common', 
+	rarity: 'Legendary', 
 	text: "The enemy draws only 1 card next turn. This card obtains +5 power.", 
 }

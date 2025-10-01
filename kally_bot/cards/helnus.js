@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Echorus', 
 	power: 3, 
 	cost: '', 
-	rarity: 'Common', 
+	rarity: 'Epic', 
 	text: "Instead of damaging, this card heals the enemy by 1 and enemy won't get the combat crystal. You obtain 1 green crystal", 
 }

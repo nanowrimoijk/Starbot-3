@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Mabot', 
 	power: 1, 
 	cost: '', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "This card obtains +1 power. Obtain a red crystal.", 
 }

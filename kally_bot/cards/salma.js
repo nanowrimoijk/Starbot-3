@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Titanide', 
 	power: 3, 
 	cost: 'BB', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "The enemy receives 2 damage points. Destroy 1 enemy crystal.", 
 }

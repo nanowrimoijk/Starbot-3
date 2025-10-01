@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Mabot', 
 	power: 2, 
 	cost: 'R', 
-	rarity: 'Common', 
+	rarity: 'Legendary', 
 	text: "During your next 2 turns, your red cards gain +1 power.", 
 }

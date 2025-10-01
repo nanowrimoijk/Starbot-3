@@ -4,6 +4,6 @@ module.exports = {
 	faction: "Vel'dhar", 
 	power: 2, 
 	cost: 'K', 
-	rarity: 'Common', 
+	rarity: 'Legendary', 
 	text: "Curse the enemy card: This card maximium base power is 1 for the rest of this game. You don't receive combat damage this turn.", 
 }

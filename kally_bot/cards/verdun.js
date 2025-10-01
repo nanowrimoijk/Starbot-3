@@ -4,6 +4,6 @@ module.exports = {
 	faction: "Vel'dhar", 
 	power: 0, 
 	cost: '', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "Every time you play this card, it’s Basepower gets +1 permanently. Obtain a black crystal.", 
 }

@@ -4,6 +4,6 @@ module.exports = {
 	faction: "Vel'dhar", 
 	power: 1, 
 	cost: 'KKKKK', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "Drain 4 life from your opponent.", 
 }

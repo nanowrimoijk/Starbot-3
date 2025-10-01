@@ -4,6 +4,6 @@ module.exports = {
 	faction: "Vel'dhar", 
 	power: 3, 
 	cost: 'KC', 
-	rarity: 'Common', 
+	rarity: 'Epic', 
 	text: "Drain 1 life from your opponent and curse his card: Next time you draw this card, will have his text removed.", 
 }

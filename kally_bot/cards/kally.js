@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Titanide', 
 	power: 2, 
 	cost: 'B', 
-	rarity: 'Common', 
+	rarity: 'Legendary', 
 	text: "Before the enemy pays their card's cost: destroy 2 enemy crystals.", 
 }

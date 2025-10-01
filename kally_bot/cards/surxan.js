@@ -4,6 +4,6 @@ module.exports = {
 	faction: "Vel'dhar", 
 	power: 2, 
 	cost: '', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "Drain an enemy crystal. If you drain the crystal, receive 1 damage point. If not, obtain a black crystal.", 
 }

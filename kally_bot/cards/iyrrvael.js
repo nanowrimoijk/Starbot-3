@@ -4,6 +4,6 @@ module.exports = {
 	faction: "Vel'dhar", 
 	power: 3, 
 	cost: 'KKC', 
-	rarity: 'Common', 
+	rarity: 'Epic', 
 	text: "Destroy 1 crystal from your opponent. Drain 1 life and 1 crystal from your opponent.", 
 }

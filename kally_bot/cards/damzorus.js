@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Echorus', 
 	power: 3, 
 	cost: 'GG', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "The enemy receives 2 damage points. You heal 1 life point.", 
 }

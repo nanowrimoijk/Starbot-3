@@ -4,6 +4,6 @@ module.exports = {
 	faction: "Vel'dhar", 
 	power: 2, 
 	cost: 'K', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "Destroy 2 enemy crystals. If the enemy card was cursed, destroy one more.", 
 }

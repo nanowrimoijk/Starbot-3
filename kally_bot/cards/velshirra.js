@@ -4,6 +4,6 @@ module.exports = {
 	faction: "Vel'dhar", 
 	power: 2, 
 	cost: '', 
-	rarity: 'Common', 
+	rarity: 'Legendary', 
 	text: "If your opponent has 4 or more curses on his cards, when you draw this card obtains +3 base power and the opponent will not obtain combat crystal this turn.", 
 }

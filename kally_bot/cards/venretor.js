@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Mabot', 
 	power: 1, 
 	cost: 'L', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "This card obtains +3 power. If Venretor deals 1 or less damage, enemy receives 1 damage point.", 
 }

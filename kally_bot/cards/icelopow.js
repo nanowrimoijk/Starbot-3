@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Mabot', 
 	power: 5, 
 	cost: '', 
-	rarity: 'Common', 
+	rarity: 'Legendary', 
 	text: "On your next turn, your card’s text will be erased.", 
 }

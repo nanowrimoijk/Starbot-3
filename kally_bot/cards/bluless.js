@@ -4,6 +4,7 @@ module.exports = {
 	faction: 'Echorus', 
 	power: 2, 
 	cost: '', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "Obtain a green crystal. If you lose the combat, heal for 1 life, otherwise take 1 damage.", 
+	tags: ['crystal_generation', 'healing']
 }

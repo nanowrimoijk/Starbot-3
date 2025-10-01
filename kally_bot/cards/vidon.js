@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Echorus', 
 	power: 2, 
 	cost: 'GG', 
-	rarity: 'Common', 
+	rarity: 'Epic', 
 	text: 'You heal 1 life point. This card obtains +4 power.', 
 }

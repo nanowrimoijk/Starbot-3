@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Echorus', 
 	power: 2, 
 	cost: 'G', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "If the enemy uses any crystals: This card obtains +2 power, and an extra +1 for each crystal used.", 
 }

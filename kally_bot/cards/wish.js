@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Titanide', 
 	power: 3, 
 	cost: 'BBGGRR', 
-	rarity: 'Common', 
+	rarity: 'Legendary', 
 	text: "You can't draw this card before turn 7. You win the match.", 
 }

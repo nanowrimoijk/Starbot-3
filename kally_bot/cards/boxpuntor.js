@@ -4,6 +4,7 @@ module.exports = {
 	faction: 'Mabot', 
 	power: 3, 
 	cost: 'RR', 
-	rarity: 'Common', 
-	text: "The enemy receives 3 damage points.", 
+	rarity: 'Rare', 
+	text: "The enemy receives 3 damage points.",
+	tags: ['effect_damage'] 
 }

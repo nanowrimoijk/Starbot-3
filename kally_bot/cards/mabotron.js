@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Mabot', 
 	power: 3, 
 	cost: '', 
-	rarity: 'Common', 
+	rarity: 'Epic', 
 	text: "Next turn, your red cards obtain +1 power.", 
 }

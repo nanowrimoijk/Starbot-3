@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Echorus', 
 	power: 1, 
 	cost: 'G', 
-	rarity: 'Common', 
+	rarity: 'Epic', 
 	text: "Just before the combat step: change your power with your enemy’s power", 
 }

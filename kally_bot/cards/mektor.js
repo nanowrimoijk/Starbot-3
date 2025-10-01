@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Mabot', 
 	power: 2, 
 	cost: '', 
-	rarity: 'Common', 
+	rarity: 'Rare', 
 	text: "Obtain a green crystal. If there is a tie in combat, your enemy will receive a crystal.", 
 }

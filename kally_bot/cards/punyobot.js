@@ -4,6 +4,6 @@ module.exports = {
 	faction: 'Mabot', 
 	power: 2, 
 	cost: 'L', 
-	rarity: 'Common', 
+	rarity: 'Epic', 
 	text: "If the sum of both players crystals is 3 or more before combat: This card gains +4 power.", 
 }
