@@ -3,7 +3,7 @@ module.exports = {
 	name: "Vel'Dharun", 
 	faction: "Vel'dhar", 
 	power: 3, 
-	cost: 'KC', 
+	cost: 'KCC', 
 	rarity: 'Rare', 
-	text: "Drain 1 enemy crystal, if enemy's card color was Red or black: heal by 2. Otherwise deal 2 damage", 
+	text: "Deal 2 damage to the opponent. If OP card its blue or red: drain 1 life. Otherwise deal 2 extra damage", 
 }

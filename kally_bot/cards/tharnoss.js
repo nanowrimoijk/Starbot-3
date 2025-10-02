@@ -3,7 +3,7 @@ module.exports = {
 	name: "Thar'Noss", 
 	faction: "Vel'dhar", 
 	power: 1, 
-	cost: 'KG', 
+	cost: 'KGC', 
 	rarity: 'Epic', 
-	text: "Heal 1 life point. If opponents card was cursed, you receive no combat damage this turn. Drain 1 opponent's crystal", 
+	text: "If you would take combat damage, ignore it and deal 3 damage. Curse your opponents card: Next time you play this card, destroy 2 of your crystals.", 
 }

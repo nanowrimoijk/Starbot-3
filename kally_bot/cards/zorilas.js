@@ -5,5 +5,5 @@ module.exports = {
 	power: 2, 
 	cost: '', 
 	rarity: 'Legendary', 
-	text: "If there are any buffs or status ailments, erases them all and gains +3 power.", 
+	text: "If there is an ailment, buff, or curse, this card obtains +3 Power. If there are 2 or more, obtains +4 Power.", 
 }

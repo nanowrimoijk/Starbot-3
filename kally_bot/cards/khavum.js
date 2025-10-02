@@ -3,7 +3,7 @@ module.exports = {
 	name: "Kha'Vum", 
 	faction: "Vel'dhar", 
 	power: 3, 
-	cost: 'KR', 
+	cost: 'KRC', 
 	rarity: 'Legendary', 
-	text: "Drain 1 life point, then deal 1 damage to the enemy. If opponents card was cursed, you deal 2 damage instead", 
+	text: "This card obtain + 4 power. Curse the opponent card: This card maximium base power is 1 for the rest of this game.", 
 }
