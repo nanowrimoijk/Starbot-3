@@ -76,7 +76,7 @@ module.exports = {
 								.setDescription(`${message.author}, you have already claimed your daily reward!\nCome back in ${diffHours} hours to claim it again!`)
 								.setTimestamp()
 
-								message.reply({embeds: [exampleEmbed]}).catch(console.error);
+								message.channel.send({embeds: [exampleEmbed]}).catch(console.error);
 						}
 
 

@@ -53,7 +53,7 @@ Come back in ${60 - diffMinutes} minutes!`)
 							.setTimestamp()
 
 						//message.channel.send(exampleEmbed);
-						message.reply({embeds: [exampleEmbed]}).catch(console.error);
+						message.channel.send({embeds: [exampleEmbed]}).catch(console.error);
 					}
 				}
 			});
@@ -125,7 +125,7 @@ function give_work(message, Discord){
 						.setTimestamp()
 		
 					//message.channel.send(exampleEmbed);
-					message.reply({embeds: [exampleEmbed]}).catch(console.error);
+					message.channel.send({embeds: [exampleEmbed]}).catch(console.error);
 				});
 		
 				connection.release();
