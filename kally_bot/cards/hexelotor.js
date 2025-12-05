@@ -1,6 +1,6 @@
 
 module.exports = {
-	name: "Gro'Thaal", 
+	name: "Hex'Elotor", 
 	faction: "Vel'dhar", 
 	power: 3, 
 	cost: 'K', 
