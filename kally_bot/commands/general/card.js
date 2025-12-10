@@ -36,7 +36,7 @@ module.exports = {
 					}
 				}
 
-				//console.log(current_step);
+				console.log(current_step);
 
 				if(current_step.length == 1){
 					break;
