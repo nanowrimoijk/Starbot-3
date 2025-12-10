@@ -5,5 +5,5 @@ module.exports = {
 	power: 0, 
 	cost: '', 
 	rarity: 'Common', 
-	text: "If opponent has any crystals: Drain an enemy crystal", 
+	text: "If opponent has any crystals: Drain an enemy crystal. Otherwise, drain 1 life point.", 
 }
