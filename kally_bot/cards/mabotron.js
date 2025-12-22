@@ -5,5 +5,5 @@ module.exports = {
 	power: 3, 
 	cost: '', 
 	rarity: 'Epic', 
-	text: "Next turn, your red cards obtain +1 power.", 
+	text: "Next turn, your cards obtain +1 power.", 
 }

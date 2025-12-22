@@ -5,5 +5,5 @@ module.exports = {
 	power: 3, 
 	cost: 'RC', 
 	rarity: 'Legendary', 
-	text: "Destroy 2 enemy crystals. For each crystal you didn't break, this card gains +2 power.", 
+	text: "Destroy 3 enemy crystals. For each crystal you didn't break, this card gains +1 power.", 
 }
