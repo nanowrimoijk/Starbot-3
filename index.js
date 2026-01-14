@@ -11,6 +11,25 @@ const client = new Discord.Client({partials: ["CHANNEL"], intents: 37445});
 client.needs_update = [];
 client.initialized = false;
 
+let mysql = require('mysql2');
+
+let con = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD, 
+  database: process.env.DB_DATABASE
+});
+
+
+function keepAlive(){
+  con.getConnection(function(err, connection){
+    if(err) { return; }
+    connection.ping();
+    connection.end();
+  });
+}
+setInterval(keepAlive, 30000);
+
 
 
 console.log("                     -= BOT STARTING =-");
