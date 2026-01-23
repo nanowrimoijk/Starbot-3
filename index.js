@@ -25,7 +25,7 @@ function keepAlive(){
   con.getConnection(function(err, connection){
     if(err) { return; }
     connection.ping();
-    connection.end();
+    connection.release();
   });
 }
 setInterval(keepAlive, 30000);
