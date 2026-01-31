@@ -3,7 +3,8 @@ const fs = require('fs');
 
 module.exports = (client, Discord) => {
 	client.db = {
-		cards: {}
+		cards: {}, 
+		RE: {}
 	}
 
 
@@ -17,7 +18,7 @@ module.exports = (client, Discord) => {
 		}
 	}
 
-	['cards'].forEach(e => load_dir(e));
+	['cards', 'RE'].forEach(e => load_dir(e));
 
 
 	//console.log(client.db)
