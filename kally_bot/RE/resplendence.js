@@ -1,6 +1,6 @@
 
 module.exports = {
-	name: "Resplencence", 
+	name: "Resplendence", 
 	faction: "Mabot", 
 	power: 7, 
 	cost: '', 
