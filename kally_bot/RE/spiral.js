@@ -6,3 +6,4 @@ module.exports = {
 	cost: 'RR', 
 	rarity: 'RE', 
 	text: "The opponent can't obtain crystals next turn."
+}

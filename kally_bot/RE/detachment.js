@@ -6,3 +6,4 @@ module.exports = {
 	cost: 'RR', 
 	rarity: 'RE', 
 	text: "The opponent's card text will be erased next turn."
+}

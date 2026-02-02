@@ -6,3 +6,4 @@ module.exports = {
 	cost: 'R', 
 	rarity: 'RE', 
 	text: "Destroy 3 opponent crystals."
+}
