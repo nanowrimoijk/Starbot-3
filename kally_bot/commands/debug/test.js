@@ -31,7 +31,7 @@ module.exports = {
 		// Put the following code wherever you want to send the embed pages:
 
 		const { author, channel } = message;
-		const guilds = [...client.commands];
+		const guilds = [...Object.values(client.db.cards)];
 		//console.log(guilds);
 		//const guilds = [...client.guilds.cache.values()];
 
@@ -44,6 +44,7 @@ module.exports = {
 			const current = guilds.slice(start, start + 3);
 
 			// You can of course customise this embed however you want
+			console.log(current)
 			return new MessageEmbed({
 				title: `Showing guilds ${start + 1}-${start + current.length} out of ${guilds.length
 					}`,
