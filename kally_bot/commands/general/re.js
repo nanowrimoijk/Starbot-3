@@ -56,7 +56,7 @@ module.exports = {
 
 
 function find_image(query){
-	let search = query.split("'").join('');
+	let search = query.split("'").join('').split(' ').join('_')
 	//console.log(`avatar-${query.toLowerCase()}.png`)
 	//console.log('')
 
@@ -65,8 +65,7 @@ function find_image(query){
 	for (const image of image_files) {
 		//console.log(image.toLowerCase());
 
-
-		if(image.toLowerCase() == `avatar-${search.toLowerCase()}.png`){
+		if(image.toLowerCase() == `skill-${search.toLowerCase()}.png`){
 			console.log(image)
 			return image;
 		}

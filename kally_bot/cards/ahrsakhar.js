@@ -5,6 +5,6 @@ module.exports = {
 	power: 3, 
 	cost: '', 
 	rarity: 'Common', 
-	text: "Destroy 1 enemy crystal. If you didn't destroy 1 crystal, you take 1 damage.", 
+	text: "Destroy 1 enemy crystal. If you didn't destroy a crystal, drain 1 after combat.", 
 	tags: ['crystal_destruction']
 }
