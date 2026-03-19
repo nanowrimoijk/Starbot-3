@@ -5,5 +5,5 @@ module.exports = {
 	power: 2, 
 	cost: '', 
 	rarity: 'Legendary', 
-	text: "Draw Step: if you have 3 different colors in your hand, her base power will be 5 and your enemy will not receive a crystal if Rebel deals combat damage.", 
+	text: "If you win the combat: deny the crystal to the opponent. If you have at least 3 cards of 3 different colors in your deck: +2 base power.", 
 }
