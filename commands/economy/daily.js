@@ -2,12 +2,12 @@ let prefix = process.env.PREFIX;
 
 let mysql = require('mysql2');
 
-let con = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD, 
-  database: process.env.DB_DATABASE
-});
+// let con = mysql.createPool({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD, 
+//   database: process.env.DB_DATABASE
+// });
 
 
 const moment = require('moment');
@@ -22,11 +22,11 @@ module.exports = {
 	developer: false, 
 	category: 'economy', 
 
-	execute(client, message, args, Discord) {
+	execute(client, message, args, Discord, con) {
 		try{
 
 			con.getConnection(function(err, connection){
-				if(err) throw err;
+				//if(err) throw err;
 				let sql;
 
 				sql = `SELECT * FROM users WHERE id = ${message.author.id}`
@@ -69,7 +69,7 @@ module.exports = {
 								temp_user.daily_streak += 1;
 							}
 							
-							give_daily(message, temp_user, Discord);
+							give_daily(message, temp_user, Discord, con);
 						}else{
 							let exampleEmbed = new Discord.MessageEmbed()
 								.setColor('#8ce7ff')
@@ -123,7 +123,7 @@ module.exports = {
 
 
 
-function give_daily(message, temp_user, Discord){
+function give_daily(message, temp_user, Discord, con){
 
 		temp_user.money = parseInt(temp_user.money);
 		temp_user.money += daily_value;
@@ -143,7 +143,7 @@ function give_daily(message, temp_user, Discord){
 
 			let sql = `UPDATE users SET money = ${temp_user.money}, last_daily = '${temp_user.last_daily}', daily_streak = ${temp_user.daily_streak}, last_work = '${temp_user.last_work}' WHERE id = ${message.author.id}`;
 			con.query(sql, function(err, result){
-				if(err) throw err;
+				//if(err) throw err;
 
 				let exampleEmbed = new Discord.MessageEmbed()
 						.setColor('#8ce7ff')

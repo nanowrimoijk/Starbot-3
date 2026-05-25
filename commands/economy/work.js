@@ -2,12 +2,12 @@ let prefix = process.env.PREFIX;
 
 let mysql = require('mysql2');
 
-let con = mysql.createPool({
- 	host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD, 
-  database: process.env.DB_DATABASE
-});
+// let con = mysql.createPool({
+//  	host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD, 
+//   database: process.env.DB_DATABASE
+// });
 
 
 const moment = require('moment');
@@ -21,14 +21,14 @@ module.exports = {
 	developer: false, 
 	category: 'economy', 
 
-	execute(client, message, args, Discord) {
+	execute(client, message, args, Discord, con) {
 
 		con.getConnection(function(err, connection){
-			if(err) throw err;
+			//if(err) throw err;
 
 			let sql = `SELECT * FROM users WHERE id = ${message.author.id}`;
 			con.query(sql, function(err, result){
-				if(err) throw err;
+				//if(err) throw err;
 
 				if(result == undefined || result[0] == undefined){
 					client.commands.get('create_profile').execute(client, message, args, Discord, 'work');
@@ -44,7 +44,7 @@ module.exports = {
 					let diffSeconds = Math.round(diffTime / (1000));
 
 					if (diffHours >= 1){
-						give_work(message, Discord);
+						give_work(message, Discord, con);
 					}else{
 						let exampleEmbed = new Discord.MessageEmbed()
 							.setColor('#8ce7ff')
@@ -92,14 +92,14 @@ Come back in ${60 - diffMinutes} minutes!`)
 }
 
 
-function give_work(message, Discord){
+function give_work(message, Discord, con){
 
 	con.getConnection(function(err, connection){
-		if(err) throw err;
+		//if(err) throw err;
 			
 			let sql = `SELECT * FROM users WHERE id = ${message.author.id}`;
 			con.query(sql, function(err, result){
-				if(err) throw err;
+				//if(err) throw err;
 		
 				let user = result[0];
 		
@@ -116,7 +116,7 @@ function give_work(message, Discord){
 		
 				sql = `UPDATE users SET money = ${temp_user.money}, last_daily = '${temp_user.last_daily}', daily_streak = ${temp_user.daily_streak}, last_work = '${temp_user.last_work}' WHERE id = ${message.author.id}`;
 				con.query(sql, function(err, result){
-					if(err) throw err;
+					//if(err) throw err;
 		
 					let exampleEmbed = new Discord.MessageEmbed()
 						.setColor('#8ce7ff')
