@@ -2,12 +2,12 @@ let prefix = process.env.PREFIX;
 
 let mysql = require('mysql2');
 
-let con = mysql.createPool({
- 	host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD, 
-  database: process.env.DB_DATABASE
-});
+// let con = mysql.createPool({
+//  	host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD, 
+//   database: process.env.DB_DATABASE
+// });
 
 
 const moment = require('moment');
@@ -19,7 +19,7 @@ module.exports = {
 	developer: false, 
 	category: 'economy', 
 
-	execute(client, message, args, Discord) {
+	execute(client, message, args, Discord, con) {
 
 		con.getConnection(function(err, connection){
 			let sql = `SELECT * FROM users WHERE id = ${message.author.id}`;
