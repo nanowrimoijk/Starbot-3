@@ -1,6 +1,17 @@
 const { MessageEmbed } = require('discord.js');
 const { Permissions } = require('discord.js');
 
+
+let mysql = require('mysql2');
+
+let con = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD, 
+  database: process.env.DB_DATABASE
+});
+
+
 let mod_role = process.env.MOD_ROLE;
 let dev_log_channel = process.env.DEV_LOG_CHANNEL;
 let dev_log_server = process.env.DEV_LOG_SERVER;
@@ -68,7 +79,7 @@ module.exports = (Discord, client, message) => {
 		}
 
 		try {
-			command.execute(client, message, args, Discord);
+			command.execute(client, message, args, Discord, con);
 		} catch (error) {
 			console.log(error);
 			message.reply('there was an error trying to execute that command!');
