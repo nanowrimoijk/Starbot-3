@@ -21,7 +21,7 @@ module.exports = {
 		let sql = args.join(' ');
 
 		con.getConnection(function(err, connection){
-			if(err) throw err;
+			//if(err) throw err;
 
 			con.query(sql, function(err, result){
 				if(err){
