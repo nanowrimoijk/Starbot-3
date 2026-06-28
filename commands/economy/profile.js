@@ -26,7 +26,7 @@ module.exports = {
 			con.query(sql, function(err, result){
 
 				if(result == undefined || result[0] == undefined){
-					client.commands.get('create_profile').execute(client, message, args, Discord, 'profile');
+					client.commands.get('create_profile').execute(client, message, args, Discord, con, 'profile');
 				}else{
 					let user = result[0];
 					let daily_text = moment(user.last_daily).fromNow();
