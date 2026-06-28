@@ -67,7 +67,7 @@ module.exports = {
 		    console.log("1 record inserted");
 
 		    if(callback != undefined){
-					client.commands.get(callback).execute(client, message, args, Discord);
+					client.commands.get(callback).execute(client, message, args, Discord, con);
 				}
 		  });
 
